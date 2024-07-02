@@ -1,0 +1,13 @@
+prefix=D:/Courses/Python/ATS Tracker Streamlit/venv/Library
+exec_prefix=D:/Courses/Python/ATS Tracker Streamlit/venv/Library
+libdir=D:/Courses/Python/ATS Tracker Streamlit/venv/Library/lib
+sharedlibdir=D:/Courses/Python/ATS Tracker Streamlit/venv/Library/lib
+includedir=D:/Courses/Python/ATS Tracker Streamlit/venv/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
