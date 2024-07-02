@@ -1,4 +1,6 @@
 streamlit
+streamlit-option-menu
+google-generativeai
 PyPDF2
-google.generativeai
+python-docx
 python-dotenv
