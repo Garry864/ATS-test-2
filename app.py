@@ -77,7 +77,7 @@ def show_pdf(uploaded_file):
     try:
         pdf_contents = uploaded_file.read()
         base64_pdf = base64.b64encode(pdf_contents).decode('utf-8')
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="800" type="application/pdf"></iframe>'
+        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="800" type="application/pdf" sandbox="allow-scripts"></iframe>'
         st.markdown(pdf_display, unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error displaying PDF file: {e}")
