@@ -1,6 +1,6 @@
 # Smart ATS :pager::desktop_computer:
 
-![Smart ATS](https://your-image-url.com/logo.png)
+![Smart ATS](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx8PoA0ZmpCt7R3P7SbHcljKZ04Wft7QoX9C-GqjUS_IKMDzf9tzBj5cp2vg&s)
 
 ## Improve Your Resume with ATS
 
@@ -28,7 +28,7 @@ Before you begin, ensure you have the following installed on your system:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/smart-ats.git
+    git clone https://github.com/Garry864/Smart-ATS-Advisor.git
     cd smart-ats
     ```
 
@@ -50,7 +50,7 @@ Before you begin, ensure you have the following installed on your system:
     Create a `.env` file in the root directory and add your Google API key:
 
     ```env
-    GOOGLE_API_KEY=your-google-api-key
+    API=your-google-api-key
     ```
 
 ### Running the Application
