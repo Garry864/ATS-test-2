@@ -85,7 +85,7 @@ description:{jd}
 """
 
 input_prompt3 = """
-Consider yourself as an ATS advisor for the application. Give the best possible improvisation suggestions from the response and form the resume and the job description. check wether the candidate is experienced or fresher then Highlight the skillsets which needs to be improved according to the description also tell the candidate where he/she focus more on skillsets. and most important start with the phrase listen candidate name if specified in the resume.
+Consider yourself as an ATS advisor for the application. Give the best possible improvisation suggestions from the response and form the resume and the job description. check wether the candidate is experienced or fresher then Highlight the skillsets which needs to be improved according to the description also tell the candidate where he/she focus more on skillsets. and most important start with the phrase listen candidate name with its proper name if specified in the resume.
 resume:{text}
 description:{jd}
 response:{response}
@@ -105,52 +105,57 @@ selected = option_menu(
 # Perform actions based on selected menu item
 if uploaded_file is not None:
     show_pdf(uploaded_file)
-
-    if selected == "Resume Analysis":
-        with st.expander("About this resume ⤵"):
-            pdf_content = input_pdf_text(uploaded_file)
-            input_data = {
+    pdf_content = input_pdf_text(uploaded_file)
+    input_data = {
                 "text": pdf_content,
                 "jd": input_text
             }
-            with st.spinner('Processing...'):
-                response = get_gemini_response(input_prompt1.format(**input_data))
-            if response:
-                st.session_state.resume_analysis_response = response
-                st.subheader("Resume Analysis")
-                st.write(response)
+    
+    if selected == "Resume Analysis":
+        with st.expander("About this resume ⤵"):
+            if st.session_state.resume_analysis_response is None:
+                with st.spinner('Processing...'):
+                    response = get_gemini_response(input_prompt1.format(**input_data))
+                if response:
+                    st.session_state.resume_analysis_response = response
+                    st.subheader("Resume Analysis")
+                    st.write(response)
+            else:
+                st.write(st.session_state.resume_analysis_response)
 
     elif selected == "Percentage Match":
         with st.expander("ATS Score of this Resume ⤵"):
-            pdf_content = input_pdf_text(uploaded_file)
-            input_data = {
-                "text": pdf_content,
-                "jd": input_text
-            }
-            with st.spinner('Processing...'):
-                response = get_gemini_response(input_prompt2.format(**input_data))
-            if response:
-                st.session_state.percentage_match_response = response
-                st.subheader("Percentage Match")
-                st.write(response)
+            if st.session_state.percentage_match_response is None:
+                with st.spinner('Processing...'):
+                    response = get_gemini_response(input_prompt2.format(**input_data))
+                if response:
+                    st.session_state.percentage_match_response = response
+                    st.subheader("Percentage Match")
+                    st.write(response)
+            else:
+                st.write(st.session_state.percentage_match_response)
 
     elif selected == "Improvisation":
-        if st.session_state.percentage_match_response:
-            with st.expander("Suggestions for your Improvisation here ⤵"):
-                pdf_content = input_pdf_text(uploaded_file)
-                input_data = {
-                    "text": pdf_content,
-                    "jd": input_text,
-                    "response": st.session_state.percentage_match_response
-                }
-                with st.spinner('Processing...'):
-                    response = get_gemini_response(input_prompt3.format(**input_data))
-                if response:
-                    st.subheader("Improvisation Suggestions")
-                    st.write(response)
-                    st.session_state.improvisation_response = response
-        else:
-            st.warning("Please complete the 'Percentage Match' analysis first.")
+        with st.expander("Suggestions for your Improvisation here ⤵"):
+            if st.session_state.improvisation_response is None:
+                if st.session_state.percentage_match_response:
+                    
+                        pdf_content = input_pdf_text(uploaded_file)
+                        response_data = {
+                            "text": pdf_content,
+                            "jd": input_text,
+                            "response": st.session_state.percentage_match_response
+                        }
+                        with st.spinner('Processing...'):
+                            response = get_gemini_response(input_prompt3.format(**response_data))
+                        if response:
+                            st.subheader("Improvisation Suggestions")
+                            st.write(response)
+                            st.session_state.improvisation_response = response
+                else:
+                    st.warning("Please complete the 'Percentage Match' analysis first.")
+            else:
+                st.write(st.session_state.improvisation_response)
 
 else:
     st.warning("Please upload the resume")
