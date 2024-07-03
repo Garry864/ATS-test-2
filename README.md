@@ -1,4 +1,4 @@
-# Smart ATS :pager::desktop_computer:
+# Smart ATS :desktop_computer:
 
 ![Smart ATS](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx8PoA0ZmpCt7R3P7SbHcljKZ04Wft7QoX9C-GqjUS_IKMDzf9tzBj5cp2vg&s)
 
