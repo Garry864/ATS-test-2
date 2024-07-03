@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure the generative AI with the API key
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("API"))
 
 # Streamlit settings
 page_title = "Smart ATS"
